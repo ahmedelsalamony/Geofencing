@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--For Google Service Update-->
+
+    <string name="dialog_message">يستخدم هذا التطبيق google service من اجل ارسال التنبيهات</string>
+    <string name="dialog_Title">تحتاج لعمل تحديث</string>
+    <string name="dialog_toast">تحتاج الى تنزيل Google Play اولا</string>
+    <string name="dialog_ok">موافق</string>
+
+
+
+
+
+
+</resources>
