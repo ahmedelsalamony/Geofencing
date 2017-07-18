@@ -1,4 +1,4 @@
-package com.example.lap_shop.geofencing.Geofencing;
+package com.example.lap_shop.geofencing.Service_Geofencing;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
@@ -13,6 +15,7 @@ import android.util.Log;
 
 import com.example.lap_shop.geofencing.MainActivity;
 import com.example.lap_shop.geofencing.R;
+import com.example.lap_shop.geofencing.Tools.GeofenceErrorMessages;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
 
@@ -36,12 +39,15 @@ public class MyIntentServiceGeofenceTransitions extends IntentService {
      */
     public MyIntentServiceGeofenceTransitions() {
         // Use the TAG to name the worker thread.
+
         super(TAG);
+
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+
     }
 
     /**
@@ -51,6 +57,7 @@ public class MyIntentServiceGeofenceTransitions extends IntentService {
      */
     @Override
     protected void onHandleIntent(Intent intent) {
+
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
         if (geofencingEvent.hasError()) {
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
@@ -133,11 +140,12 @@ public class MyIntentServiceGeofenceTransitions extends IntentService {
 
         // Get a notification builder that's compatible with platform versions >= 4
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         // Define the notification settings.
         builder.setSmallIcon(R.mipmap.ic_launcher)
                 // In a real app, you may want to use a library like Volley
                 // to decode the Bitmap.
+                .setSound(defaultSoundUri)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(),
                         R.mipmap.ic_launcher))
                 .setColor(Color.RED)

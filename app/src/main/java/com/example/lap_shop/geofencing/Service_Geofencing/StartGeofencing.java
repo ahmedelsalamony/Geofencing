@@ -1,13 +1,15 @@
-package com.example.lap_shop.geofencing.Gps;
+package com.example.lap_shop.geofencing.Service_Geofencing;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.example.lap_shop.geofencing.Geofencing.Constants;
+import com.example.lap_shop.geofencing.Tools.CurrentLocation;
 
-public class MyService extends Service {
-    public MyService() {
+
+public class StartGeofencing extends Service {
+
+    public StartGeofencing() {
     }
 
     @Override
@@ -20,6 +22,7 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         System.out.println("On Start ");
         super.onStartCommand(intent, flags, startId);
+
         return START_STICKY;
     }
 
@@ -28,7 +31,9 @@ public class MyService extends Service {
 
 
         System.out.println("On Craete");
-     //   new CurrentLocation(getApplicationContext());
-        new CallGeofancing(getApplicationContext());
+
+
+        new CurrentLocation(getApplicationContext());
+//        new CallGeofancing(getApplicationContext());
     }
 }

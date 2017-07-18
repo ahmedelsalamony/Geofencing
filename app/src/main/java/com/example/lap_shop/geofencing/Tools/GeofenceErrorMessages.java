@@ -1,4 +1,4 @@
-package com.example.lap_shop.geofencing.Geofencing;
+package com.example.lap_shop.geofencing.Tools;
 
 /**
  * Created by LAP_SHOP on 15/02/2017.

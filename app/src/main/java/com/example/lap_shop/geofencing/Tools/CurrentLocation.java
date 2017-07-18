@@ -1,13 +1,10 @@
-package com.example.lap_shop.geofencing.Gps;
+package com.example.lap_shop.geofencing.Tools;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.media.RingtoneManager;
@@ -20,14 +17,11 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.lap_shop.geofencing.Geofencing.Constants;
-import com.example.lap_shop.geofencing.Geofencing.GeofenceErrorMessages;
-import com.example.lap_shop.geofencing.Geofencing.MyIntentServiceGeofenceTransitions;
+import com.example.lap_shop.geofencing.Service_Geofencing.MyIntentServiceGeofenceTransitions;
 import com.example.lap_shop.geofencing.MainActivity;
 import com.example.lap_shop.geofencing.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
@@ -40,6 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -73,6 +68,7 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
 
     public CurrentLocation(final Context context) {
         this.context = context;
+
 
 //It As OnCreate Of activity
         mGeofenceList = new ArrayList<Geofence>();
@@ -148,11 +144,12 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
 
 
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        System.out.println("Test"+ LocationServices.FusedLocationApi.getLastLocation(googleApiClient) + "");
 
         if (!mGeofenceList.isEmpty()) {
             addGeofencesButtonHandler();
         }
-        //  sendNotification("Test", LocationServices.FusedLocationApi.getLastLocation(googleApiClient) + "");
+
     }
 
     @Override
@@ -173,26 +170,6 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
     }
 
 
-    private void sendNotification(String title, String messageBody) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
 
     @Override
     public void onResult(@NonNull Status status) {
@@ -208,7 +185,7 @@ public class CurrentLocation implements GoogleApiClient.ConnectionCallbacks, Goo
             // Update the UI. Adding geofences enables the Remove Geofences button, and removing
             // geofences enables the Add Geofences button.
             // setButtonsEnabledState();
-            sendNotification("Test", "You Here" + "");
+          //  sendNotification("Test", "You Here" + "");
             Toast.makeText(
                     context,
                     "hjkhjghjfgdd",

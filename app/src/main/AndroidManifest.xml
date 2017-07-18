@@ -29,10 +29,10 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".Geofencing.MyIntentServiceGeofenceTransitions"
+            android:name=".Service_Geofencing.MyIntentServiceGeofenceTransitions"
             android:exported="false" />
         <service
-            android:name=".Gps.MyService"
+            android:name=".Service_Geofencing.StartGeofencing"
             android:enabled="true"
             android:exported="true"></service>
     </application>

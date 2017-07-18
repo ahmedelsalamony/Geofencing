@@ -1,4 +1,4 @@
-package com.example.lap_shop.geofencing.Gps;
+package com.example.lap_shop.geofencing.Tools;
 
 import android.app.Activity;
 import android.content.DialogInterface;
